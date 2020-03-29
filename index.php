@@ -1,3 +1,6 @@
+<?php
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -42,7 +45,7 @@
                 <div
                     class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"> </span><a class="btn btn-link action-button" role="button" href="index.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">HOME</a><a class="btn btn-link action-button"
-                        role="button" href="Login.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">CONTACT US</a><a class="btn btn-link action-button" role="button" href="Login_Doc.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104695;font-weight:bold;">SIGN UP</a></div>
+                        role="button" href="Login.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">CONTACT US</a><a class="btn btn-link action-button" role="button" href="Login_Pat.php" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104695;font-weight:bold;">SIGN UP</a></div>
     </div>
     </nav>
     </div>

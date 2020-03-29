@@ -1,3 +1,5 @@
+<?php
+?>
 <!DOCTYPE html>
 <html>
 
@@ -34,25 +36,28 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body style="background-image:url(&quot;assets/img/Doc_log.jpg&quot;);background-size:cover;background-repeat:no-repeat;background-position:center;margin-top:0px;">
+<body>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="color:rgb(0,0,0);background-color:#c5c5c5;height:80px;margin-top:20px;">
-        <div class="container"><a class="navbar-brand" href="#"><img src="assets/img/Final.png" style="height:80px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand" href="#"><img src="assets/img/Final.png" style="height:100px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"> </span><a class="btn btn-link action-button" role="button" href="index.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">HOME</a><a class="btn btn-link action-button"
-                    role="button" href="index.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">CONTACT US</a></div>
+                    role="button" href="index.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">CONTACT US</a><a class="btn btn-link action-button" role="button" href="Login_Pat.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104695;font-weight:bold;">LOG OUT</a></div>
         </div>
     </nav>
-    <div class="login-clean" style="width:340px;height:390px;padding-top:0px;margin-left:450px;margin-top:75px;">
-        <form method="post" style="height:390px;padding-top:15px;padding-bottom:20px;width:340px;margin-right:10px;">
-            <h2 class="sr-only">Login Form</h2>
-            <div class="illustration" style="background-size:cover;height:130px;width:120px;margin-left:30px;"><i class="icon ion-ios-pulse-strong" style="color:#104685;margin-left:50px;"></i></div>
-            <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email" style="padding-top:0px;"></div>
-            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-            <div class="form-group"><a class="btn btn-primary btn-block" role="button" href="Doctor_Upload.html" style="padding-bottom:8px;padding-top:8px;margin-top:20px;">Log In</a></div><a href="#" class="forgot" style="width:170px;margin-left:40px;">Forgot your email or password?</a>
-            <a
-                href="Signup_Doc.html" class="forgot" style="width:170px;margin-top:5px;margin-left:40px;">New user? Create new account.</a>
-        </form>
+    <div class="register-photo" style="width:500px;height:530px;margin-top:20px;padding-top:20px;margin-left:400px;color:#c5c5c5;background-color:#c5c5c5;">
+        <div class="form-container"><form method="post" style="width:400px;height:450px;padding-right:0px;"><input type="text" placeholder="Name" class="form-control" style="width:300px;" required/><input type="text" placeholder="Age" class="form-control" style="width:300px;margin-top:10px;" required/><input type="text" value="Gender" readonly class="form-control-plaintext"
+        style="margin-top:10px;width:100px;" /><input type="radio" name="gender" value="female" /> Female<br><input type="radio" name="gender" value="male"/> Male <br>
+    <!-- <input type="text" value="Upload Wave File:" readonly class="form-control-plaintext"
+        style="margin-top:10px;width:150px;" /> --><!-- 
+    <input type="file" name="file" value="wave" requiered/>  -->
+    <input type="text" readonly class="form-control-plaintext" style="margin-top:10px;height:30px;font-size:16px;width:300px;" value="Upload wave file:" />
+    <input type="file" style="margin-top:6px;" accept=".wav" required="">
+    <input type="text" value="Upload Feature File:" readonly class="form-control-plaintext"
+        style="margin-top:10px;" accept=".wav" required="" />
+    <input type="file" accept=".wav" required=""/> <br>
+    <button class="btn btn-primary" style="margin-top:20px;margin-left:120px;background-color:#104685;" type="button" >Generate</button>
+</form></div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

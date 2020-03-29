@@ -1,3 +1,6 @@
+<?php
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -40,20 +43,30 @@
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"> </span><a class="btn btn-link action-button" role="button" href="index.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">HOME</a><a class="btn btn-link action-button"
-                    role="button" href="index.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">CONTACT US</a><a class="btn btn-link action-button" role="button" href="Login_Pat.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104695;font-weight:bold;">LOG OUT</a></div>
+                    role="button" href="Login.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">CONTACT US</a><a class="btn btn-link action-button" role="button" href="Login_Pat.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104695;font-weight:bold;">LOG OUT</a></div>
         </div>
     </nav>
-    <div class="register-photo" style="width:500px;height:500px;margin-top:20px;padding-top:20px;margin-left:400px;color:#c5c5c5;background-color:#c5c5c5;">
-        <div class="form-container"><form method="post" style="width:400px;height:420px;padding-right:0px;"><input type="text" placeholder="Name" class="form-control" style="width:300px;" required/><input type="text" placeholder="Age" class="form-control" style="width:300px;margin-top:10px;" required/><input type="text" value="Gender" readonly class="form-control-plaintext"
-        style="margin-top:10px;width:100px;" /><input type="radio" name="gender" value="female" /> Female<br><input type="radio" name="gender" value="male"/> Male <br>
-    <input type="text" value="Upload Wave File:" readonly class="form-control-plaintext"
-        style="margin-top:10px;width:150px;" />
-    <input type="file" name="file" value="wave" requiered/> 
-    <input type="text" value="Upload Feature File:" readonly class="form-control-plaintext"
-        style="margin-top:10px;width:150px;" />
-    <input type="file" name="file" value="wave" required/> <br>
-    <input type="submit" style="margin-top:10px;margin-left:80px;width:150px;"
-</form></div>
+    <div class="register-photo" style="width:500px;height:460px;margin-top:20px;padding-top:20px;margin-left:400px;color:#c5c5c5;background-color:#c5c5c5;">
+        <div class="form-container">
+            <form method="post" style="width:400px;height:400px;padding-right:0px;"><textarea class="form-control" name="age" placeholder="Age" style="width:200px;margin-bottom:10px;"></textarea>
+                <div class="dropdown" style="width:0px;height:0px;"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="margin-left:120px;height:40px;margin-top:50px;"></button>
+                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Yes</a><a class="dropdown-item" role="presentation" href="#">No</a></div>
+                </div>
+                <div class="dropdown" style="width:0px;height:0px;"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="margin-left:120px;height:40px;margin-top:50px;"></button>
+                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Yes</a><a class="dropdown-item" role="presentation" href="#">No</a></div>
+                </div>
+                <div class="dropdown" style="width:0px;height:0px;"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="margin-left:120px;height:40px;margin-top:0px;"></button>
+                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Female</a><a class="dropdown-item" role="presentation" href="#">Male</a></div>
+                </div><textarea class="form-control" name="gender" placeholder="Gender" style="width:100px;margin-bottom:10px;"></textarea><textarea class="form-control" name="diabetic" placeholder="Diabetic" style="width:100px;margin-bottom:10px;"></textarea>
+                <textarea
+                    class="form-control" name="diabetic" placeholder="Smoker" style="width:100px;margin-bottom:10px;"></textarea>
+                    <small class="form-text text-muted" style="height:30px;font-size:16px;width:300px;">Upload wave file</small><input type="file" accept=".wav" required=""><button class="btn btn-primary" type="button" style="width:100px;">Generate</button>
+                    <div
+                        class="dropdown" style="width:0px;height:0px;"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="margin-left:120px;height:40px;margin-top:-370px;"></button>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Yes</a><a class="dropdown-item" role="presentation" href="#">No</a></div>
+        </div>
+        </form>
+    </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
