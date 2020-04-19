@@ -1,17 +1,14 @@
-<?php
-?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardiac_Arrhythmia</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <title>Cardiac Arrhythmia</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="/static/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aguafina+Script">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
@@ -24,28 +21,28 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bilbo+Swash+Caps">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
-    <link rel="stylesheet" href="assets/css/Article-Dual-Column.css">
-    <link rel="stylesheet" href="assets/css/Article-List.css">
-    <link rel="stylesheet" href="assets/css/Features-Boxed.css">
-    <link rel="stylesheet" href="assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="/static/css/Article-Dual-Column.css">
+    <link rel="stylesheet" href="/static/css/Article-List.css">
+    <link rel="stylesheet" href="/static/css/Features-Boxed.css">
+    <link rel="stylesheet" href="/static/css/Footer-Basic.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Clean-1.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
-    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
-    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
-    <link rel="stylesheet" href="assets/css/Simple-Slider.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/static/css/Login-Form-Clean-1.css">
+    <link rel="stylesheet" href="/static/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="/static/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="/static/css/Registration-Form-with-Photo.css">
+    <link rel="stylesheet" href="/static/css/Simple-Slider.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 
 <body style="background-image:url(&quot;none&quot;);background-repeat:no-repeat;background-position:top;background-size:auto;">
     <div></div>
     <div>
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="color:rgb(0,0,0);background-color:#c5c5c5;height:80px;margin-top:20px;">
-            <div class="container"><a class="navbar-brand" href="#"><img src="assets/img/Final.png" style="height:100px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container"><a class="navbar-brand" href="#"><img src="/static/img/Final.png" style="height:100px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div
                     class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"> </span><a class="btn btn-link action-button" role="button" href="index.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">HOME</a><a class="btn btn-link action-button"
-                        role="button" href="Login.html" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">CONTACT US</a><a class="btn btn-link action-button" role="button" href="Login_Pat.php" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104695;font-weight:bold;">SIGN UP</a></div>
+                    <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"> </span><a class="btn btn-link action-button" role="button" href="{{url_for('index')}}" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">HOME</a><a class="btn btn-link action-button"
+                        role="button" href="{{url_for('login')}}" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104685;font-weight:bold;">CONTACT US</a><a class="btn btn-link action-button" role="button" href="{{url_for('signup')}}" style="font-family:Arimo, sans-serif;background-color:#c5c5c5;color:#104695;font-weight:bold;">SIGN UP</a></div>
     </div>
     </nav>
     </div>
@@ -55,7 +52,7 @@
                 <div class="col-md-10 offset-md-1">
                     <div class="intro">
                         <h1 class="text-center" style="color:#d7271f;">THE MOST VALUABLE THING IS YOUR HEALTH</h1>
-                        <p class="text-center"> </p><img class="img-fluid" src="assets/img/4.png" style="margin-left:110px;background-position:center;margin-right:0px;width:700px;background-size:auto;"></div>
+                        <p class="text-center"> </p><img class="img-fluid" src="/static/img/4.png" style="margin-left:110px;background-position:center;margin-right:0px;width:700px;background-size:auto;"></div>
                 </div>
             </div>
             <div class="row">
@@ -95,7 +92,7 @@
                             <li class="justify-content-sm-center">Heart block<br></li>
                         </ul>
                         <ul class="list-group"></ul>
-                        <figure class="figure"><img class="figure-img" src="assets/img/arrythmia.png" style="width:700px;"></figure>
+                        <figure class="figure"><img class="figure-img" src="/static/img/arrythmia.png" style="width:700px;"></figure>
                         <h2>Causes of Cardiac Arrhythmia</h2>
                         <p>There are many potential&nbsp;causes of heart arrhythmias, including:<br></p>
                         <ul>
@@ -158,10 +155,10 @@
             <div class="swiper-button-next"></div>
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-    <script src="assets/js/Simple-Slider1.js"></script>
+    <script src="/static/js/Simple-Slider1.js"></script>
 </body>
 
 </html>
