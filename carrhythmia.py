@@ -4,23 +4,20 @@ from __future__ import division, print_function
 # Keras
 from keras.preprocessing import image
 from keras.applications.xception import preprocess_input
-
+from keras.models import load_model
+from keras.applications.xception import Xception
+from keras.applications.xception import preprocess_input as preprocess_input_xception, decode_predictions as decode_predictions_xception
+from keras.applications.xception import preprocess_input
+from keras.preprocessing import image
 from keras.models import load_model
 
 # Flask utils
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
-
-from keras.applications.xception import Xception
-from keras.applications.xception import preprocess_input as preprocess_input_xception, decode_predictions as decode_predictions_xception
-
-import argparse
-from keras.applications.xception import preprocess_input
-from keras.preprocessing import image
-from keras.models import load_model
-
-
 from flask import Flask, render_template, request, jsonify, Response,redirect, url_for, request
+
+#Other utilities 
+import argparse
 import jsonpickle
 import numpy as np
 import pandas as pd
@@ -45,7 +42,9 @@ from sklearn.preprocessing import normalize
 from pathlib import Path
 import tensorflow as tf
 
+
 app = Flask(__name__)
+print('Running on http://localhost:5000')
 
 def get_file_path_and_save(request):
     # Get the file from post request
@@ -189,11 +188,11 @@ def uploadwave():
 		plt.axis('off')
 		# plt.show()
 		wave_file_name_no_ext=Path(wav_file_name).stem
-		# print(wave_file_name_no_ext)
-		path='result/'
+		print(wave_file_name_no_ext)
+		path='C:/Users/bhati/Desktop/BE project/Cardiac-Arrhythmia-Classification/result/'
 		plt.savefig(str(path+wave_file_name_no_ext) + '.png',dpi=100,frameon='false',aspect='normal',bbox_inches='tight',pad_inches=0) # Spectrogram saved as a .png
 		# plt.show()
-	return render_template('base.html')
+	return render_template('Prediction.html')
 
 
 # @app.route('/wave_result', methods=['GET'])
@@ -204,53 +203,47 @@ def uploadwave():
 # 	# 	result = "Wave file uploaded successfully!!"
 # 	# 	
 
-# @app.route('/predictXception', methods=['GET', 'POST'])
-# def predictXception():
-#     if request.method == 'POST':
-#         file_path = get_file_path_and_save(request)
-#         print("Done file")
+@app.route('/predictXception', methods=['GET', 'POST'])
+def predictXception():
+    if request.method == 'POST':
+        file_path = get_file_path_and_save(request)
 
-#         # load class names
-#         classes = []
-#         with open('classes.txt', 'r') as f:
-#             classes = list(map(lambda x: x.strip(), f.readlines()))
-
+        # load class names
+        classes = []
+        with open('C:/Users/bhati/Desktop/BE project/Cardiac-Arrhythmia-Classification/classes.txt', 'r') as f:
+            classes = list(map(lambda x: x.strip(), f.readlines()))
 
 
-#         img = image.load_img(file_path, target_size=(299,299))
-#         print("image loaded")
-#         img_data = image.img_to_array(img)
-#         img_data = np.expand_dims(img_data, axis=0)
-#         img_data = preprocess_input(img_data)
-#         # img_data = preprocess_input_xception(img_data)
 
-#         model = load_model('model_fine_final.h5')
-#         print('Xception Model loaded.')
+        img = image.load_img(file_path, target_size=(299,299))
+        print("image loaded")
+        img_data = image.img_to_array(img)
+        img_data = np.expand_dims(img_data, axis=0)
+        img_data = preprocess_input(img_data)
+        # img_data = preprocess_input_xception(img_data)
 
-#         graph = tf.get_default_graph()
-#         with graph.as_default():
-#         	preds = model.predict(img_data)[0]
+        model = load_model('C:/Users/bhati/Desktop/BE project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
+        print('Xception Model loaded.')
 
-#         result = [(classes[i], float(preds[i]) * 100.0) for i in range(len(preds))]
-#         result.sort(reverse=True, key=lambda x: x[1])
-#         for i in range(2):
-#             (class_name, prob) = result[i]
-#             print("Top %d ====================" % (i + 1))
-#             print("Class name: %s" % (class_name))
-#             print("Probability: %.2f%%" % (prob))
-#         return json.dumps(result)
+        graph = tf.get_default_graph()
+        with graph.as_default():
+        	preds = model.predict(img_data)[0]
+
+        result = [(classes[i], float(preds[i]) * 100.0) for i in range(len(preds))]
+        result.sort(reverse=True, key=lambda x: x[1])
+        for i in range(2):
+            (class_name, prob) = result[i]
+            print("Top %d ====================" % (i + 1))
+            print("Class name: %s" % (class_name))
+            print("Probability: %.2f%%" % (prob))
+        return json.dumps(result)
 
         # decode the results into a list of tuples (class, description, probability)
         # pred_class = decode_predictions_xception(preds, top=1)
-        # result = str(pred_class[0][0][1])  # Convert to string
-        # return result
-    # return None
-
-# @app.route('/base1', methods=['GET','POST'])
-
-	#return jsonify(result=str1)
+        result = str(pred_class[0][0][1])  # Convert to string
+        return result
+    return None
 
 if __name__ == "__main__":
-	app.run()
-
-	
+	http_server = WSGIServer(('', 5000), app)
+	http_server.serve_forever()
