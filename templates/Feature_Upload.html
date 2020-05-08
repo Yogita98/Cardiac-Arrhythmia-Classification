@@ -45,20 +45,22 @@
     </nav>
     <div class="register-photo" style="width:440px;height:440px;margin-top:20px;padding-top:20px;margin-left:400px;color:#c5c5c5;background-color:#c5c5c5;">
         <div class="form-container"><form action="/uploadcsv" method="POST" enctype="multipart/form-data" style="width:400px;height:380px;padding-right:0px;">
-<input type="text" placeholder="Name" class="form-control" style="width:300px;" required/>
-<input type="text" placeholder="Age" class="form-control" style="width:300px;margin-top:10px;" required/>
-<input type="text" value="Gender" readonly class="form-control-plaintext" style="margin-top:10px;width:100px;" />
-<input type="radio" name="gender" value="female"/> Female<br>
-<input type="radio" name="gender" value="male" /> Male <br>
+<input type="text" placeholder="Name" class="form-control" style="width:300px;" name="name" required/>
+<input type="text" placeholder="Age" class="form-control" style="width:300px;margin-top:10px;" name="age" required/>
+<input type="text" value= "Gender" readonly class="form-control-plaintext" style="margin-top:10px;width:100px;" name="gender">
+<input type="radio" name="gender" value="Female"/> Female<br>
+<input type="radio" name="gender" value="Male" /> Male <br>
+
 <div>
-    <input type="text" value="Upload Feature File:" readonly class="form-control-plaintext" style="width:150px;" />
+    <input type="text" value="Upload Feature File:" readonly class="form-control-plaintext" style="width:150px;"/>
    
     <input type="file" name="featurefile" id="featurefile" value="feature" accept=".csv" style="margin-top:10px;" /><br>
     <input type="submit" name="featuresubmit" id="featuresubmit" style="margin-top:20px;margin-left:100px;"/>
+    <input type="hidden" id="hgender" name="hgender"/>
+</div>
 </div>
 
 
-</div>
     
 </form>
 
@@ -66,11 +68,35 @@
 
 
 </div>
-    </div>
+</div>
+
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
     <script src="/static/js/Simple-Slider1.js"></script>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+    <script src="/static/js/Simple-Slider1.js"></script>
+    <script>
+        const btn = document.querySelector('#featuresubmit');
+        // handle click button
+        btn.onclick = function () {
+            const rbs = document.querySelectorAll('input[name="hgender"]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            
+        };
+        document.getElementById('hgender').value = selectedValue; 
+    </script>
+
+
 </body>
 
 </html>

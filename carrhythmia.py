@@ -1,6 +1,9 @@
 from __future__ import division, print_function
 # coding=utf-8
 
+from firebase import firebase
+import pymysql
+
 # Keras
 from keras.preprocessing import image
 from keras.applications.xception import preprocess_input
@@ -57,6 +60,9 @@ def get_file_path_and_save(request):
         basepath, 'result', secure_filename(f.filename))
     # f.save(file_path)
     return file_path
+
+
+firebase = firebase.FirebaseApplication('https://carrhythmia.firebaseio.com/', None)
 
 
 @app.route('/')
@@ -164,17 +170,32 @@ def uploadcsv():
 		
 		# build a response dict to send back to client
 		response = {'Predicted Class - ':int(predicted_class), 'Actual Class - ': int(actual_class)}
-		
-		if (predicted_class!=1):
-			result = "Arrhythmia Detected!!" 
+
+		if(predicted_class==1):
+			result = ""
 		else:
-			result = "Arrhythmia Not Detected!!" 
-		
-		type = "Predicted Class: " + predicted_class + "  ,  Actual Class:" + actual_class
+			result = "Arrhythmia Detected!!"
 
+		types = ["No Arrhythmia","Ischemic Changes Arrhythmia","Old Anterior Myocardial Infarction Arrhythmia",\
+		"Old Inferior Myocardial Infarction Arrhythmia","Sinus Tachycardy Arrhythmia","Sinus bradycardy Arrhythmia",\
+		"Ventricular Premature Contraction Arrhythmia","Superventricular Premature Contraction Arrhythmia","Left bundle branch block Arrhythmia",\
+		"Right bundle branch block Arrhythmia","1 degree AtrioVentricular Block Arrhythmia","2 degree AtrioVentricular Block Arrhythmia",\
+		"3 degree AtrioVentricular Block Arrhythmia","Left ventricule hypertrophy Arrhythmia","Atrial Fibrillation Arrhythmia","Other type of Arrhythmia"]
 
-
-		return render_template('feature_result.html', result=result, type=type)
+		i = int(predicted_class)-1
+		class1 = str(types[i])
+		#type = "Predicted Class: " + predicted_class + "  ,  Actual Class:" + actual_class
+		type = "Arrhythmia Class is:   " + class1
+		userdata = dict(request.form)
+		print(userdata)
+		name = userdata["name"]
+		age = userdata["age"]
+		#gender = userdata["hgender"]
+		gender = "Female"
+		new_data = {"Name": name, "Age": age, "Gender": gender, "Class": class1}
+		firebase.post("/f_patients", new_data)
+                
+		return render_template('feature_result.html',result=result, type=type)
 
 @app.route('/uploadwave', methods = ['POST'])
 def uploadwave():
@@ -189,9 +210,18 @@ def uploadwave():
 		# plt.show()
 		wave_file_name_no_ext=Path(wav_file_name).stem
 		print(wave_file_name_no_ext)
-		path='C:/Users/bhati/Desktop/BE project/Cardiac-Arrhythmia-Classification/result/'
+		path='C:/Users/Dell/Desktop/Arrhythmia Project/Final BE Project/Cardiac-Arrhythmia-Classification/result/'
 		plt.savefig(str(path+wave_file_name_no_ext) + '.png',dpi=100,frameon='false',aspect='normal',bbox_inches='tight',pad_inches=0) # Spectrogram saved as a .png
 		# plt.show()
+		userdata = dict(request.form)
+		print(userdata)
+		name = userdata["name"]
+		age = userdata["age"]
+		#gender = userdata["hgender"]
+		gender = "Female"
+		new_data.update({"Name": name, "Age": age, "Gender": gender})
+		# firebase.post("/w_patients", new_data)
+        
 	return render_template('Prediction.html')
 
 
@@ -210,7 +240,7 @@ def predictXception():
 
         # load class names
         classes = []
-        with open('C:/Users/bhati/Desktop/BE project/Cardiac-Arrhythmia-Classification/classes.txt', 'r') as f:
+        with open('C:/Users/Dell/Desktop/Arrhythmia Project/Final BE Project/Cardiac-Arrhythmia-Classification/classes.txt', 'r') as f:
             classes = list(map(lambda x: x.strip(), f.readlines()))
 
 
@@ -222,7 +252,7 @@ def predictXception():
         img_data = preprocess_input(img_data)
         # img_data = preprocess_input_xception(img_data)
 
-        model = load_model('C:/Users/bhati/Desktop/BE project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
+        model = load_model('C:/Users/Dell/Desktop/Arrhythmia Project/Final BE Project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
         print('Xception Model loaded.')
 
         graph = tf.get_default_graph()
@@ -231,19 +261,34 @@ def predictXception():
 
         result = [(classes[i], float(preds[i]) * 100.0) for i in range(len(preds))]
         result.sort(reverse=True, key=lambda x: x[1])
+        (class_name1,prob1) = result[0]
+        (class_name2,prob2) = result[1]
+        if(prob1>prob2):
+            result1 = str(class_name1)
+        elif(prob2>prob1):
+            result1 = str(class_name2)
+
+        new_data.update({"Class":result1})
+        firebase.post("/w_patients", new_data)
+
+        print(json.dumps(result1))
+
         for i in range(2):
             (class_name, prob) = result[i]
             print("Top %d ====================" % (i + 1))
             print("Class name: %s" % (class_name))
             print("Probability: %.2f%%" % (prob))
-        return json.dumps(result)
+        return json.dumps(result1)
+
+	    
 
         # decode the results into a list of tuples (class, description, probability)
         # pred_class = decode_predictions_xception(preds, top=1)
-        result = str(pred_class[0][0][1])  # Convert to string
-        return result
+        # result = str(pred_class[0][0][1])  # Convert to string
+        return result1
     return None
 
 if __name__ == "__main__":
+	new_data = {}
 	http_server = WSGIServer(('', 5000), app)
 	http_server.serve_forever()
