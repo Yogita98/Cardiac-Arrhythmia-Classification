@@ -4,7 +4,10 @@ Flask==1.0.2
 Werkzeug==0.14.1
 gevent==1.4.0
 PyMySQL==0.9.3
+<<<<<<< HEAD
 # tf_nightly==1.13.0.dev20190223
+=======
+>>>>>>> 9a9d8ce928a9f496022f10f640ea604080d66e88
 pandas==0.24.1
 Keras==2.3.1
 matplotlib==3.0.2
