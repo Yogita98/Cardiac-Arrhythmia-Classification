@@ -6,8 +6,6 @@ gevent==1.4.0
 PyMySQL==0.9.3
 pandas==0.24.1
 Keras==2.3.1
-matplotlib==3.0.2
 firebase==3.0.1
-jsonpickle==1.4
 scikit_learn==0.24.0
 tensorflow==2.4.0
