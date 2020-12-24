@@ -1,8 +1,8 @@
 from __future__ import division, print_function
 # coding=utf-8
 
-from firebase import firebase
-import pymysql
+# from firebase import firebase
+# import pymysql
 
 # Keras
 import tensorflow as tf
@@ -57,7 +57,7 @@ def get_file_path_and_save(request):
     return file_path
 
 
-firebase = firebase.FirebaseApplication('https://carrhythmia.firebaseio.com/', None)
+# firebase = firebase.FirebaseApplication('https://carrhythmia.firebaseio.com/', None)
 
 
 @app.route('/')
@@ -188,7 +188,7 @@ def uploadcsv():
 		#gender = userdata["hgender"]
 		gender = "Female"
 		new_data = {"Name": name, "Age": age, "Gender": gender, "Class": class1}
-		firebase.post("/f_patients", new_data)
+		# firebase.post("/f_patients", new_data)
                 
 		return render_template('feature_result.html',result=result, type=type)
 
@@ -264,7 +264,7 @@ def predictXception():
             result1 = str(class_name2)
 
         new_data.update({"Class":result1})
-        firebase.post("/w_patients", new_data)
+        # firebase.post("/w_patients", new_data)
 
         print(json.dumps(result1))
 
