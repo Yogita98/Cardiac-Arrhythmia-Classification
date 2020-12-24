@@ -4,6 +4,5 @@ scipy==1.2.1
 gevent==1.4.0
 matplotlib==3.0.2
 pandas==0.24.1
-tf_nightly==1.13.0.dev20190223
 scikit_learn==0.24.0
 tensorflow==2.2.0
