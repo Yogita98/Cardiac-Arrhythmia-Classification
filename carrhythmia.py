@@ -5,49 +5,44 @@ from firebase import firebase
 import pymysql
 
 # Keras
-from keras.preprocessing import image
-from keras.applications.xception import preprocess_input
-from keras.models import load_model
-from keras.applications.xception import Xception
-# from keras.applications.xception import preprocess_input as preprocess_input_xception, decode_predictions as decode_predictions_xception
-# from keras.applications.xception import preprocess_input
-# from keras.preprocessing import image
-# from keras.models import load_model
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.xception import preprocess_input, Xception
+from tensorflow.keras.models import load_model
 
 # Flask utils
-from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 from flask import Flask, render_template, request, jsonify, Response,redirect, url_for, request
 
 #Other utilities 
-# import argparse
-# import jsonpickle
 import numpy as np
 import pandas as pd
-# import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 # from sklearn.feature_selection import RFE
 # from sklearn.feature_selection import RFECV
 from sklearn import preprocessing
-# from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 import pickle
 from sklearn.metrics import r2_score, mean_squared_error, classification_report
 # import sys
 import json
-# import matplotlib
+import matplotlib
 # matplotlib.use('Agg')
 from scipy.io import wavfile
 import os
 import csv
 from sklearn.preprocessing import normalize
 from pathlib import Path
-import tensorflow as tf
+
 
 
 app = Flask(__name__)
 print('Running on http://localhost:5000')
+model = load_model('C:/Users/bhati/Desktop/My Docs/BE project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
+print('Xception Model loaded.')
 
 def get_file_path_and_save(request):
     # Get the file from post request
@@ -57,7 +52,7 @@ def get_file_path_and_save(request):
     # Save the file to ./uploads
     basepath = os.path.dirname(__file__)
     file_path = os.path.join(
-        basepath, 'result', secure_filename(f.filename))
+        basepath, 'result', f.filename)
     # f.save(file_path)
     return file_path
 
@@ -210,7 +205,7 @@ def uploadwave():
 		# plt.show()
 		wave_file_name_no_ext=Path(wav_file_name).stem
 		print(wave_file_name_no_ext)
-		path='C:/Users/Dell/Desktop/Arrhythmia Project/Final BE Project/Cardiac-Arrhythmia-Classification/result/'
+		path='C:/Users/bhati/Desktop/My Docs/BE project/Cardiac-Arrhythmia-Classification/result/'
 		plt.savefig(str(path+wave_file_name_no_ext) + '.png',dpi=100,frameon='false',aspect='normal',bbox_inches='tight',pad_inches=0) # Spectrogram saved as a .png
 		# plt.show()
 		userdata = dict(request.form)
@@ -240,7 +235,7 @@ def predictXception():
 
         # load class names
         classes = []
-        with open('C:/Users/Dell/Desktop/Arrhythmia Project/Final BE Project/Cardiac-Arrhythmia-Classification/classes.txt', 'r') as f:
+        with open('C:/Users/bhati/Desktop/My Docs/BE project/Cardiac-Arrhythmia-Classification/classes.txt', 'r') as f:
             classes = list(map(lambda x: x.strip(), f.readlines()))
 
 
@@ -252,12 +247,12 @@ def predictXception():
         img_data = preprocess_input(img_data)
         # img_data = preprocess_input_xception(img_data)
 
-        model = load_model('C:/Users/Dell/Desktop/Arrhythmia Project/Final BE Project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
-        print('Xception Model loaded.')
+        # model = load_model('C:/Users/bhati/Desktop/BE project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
+        # print('Xception Model loaded.')
 
-        graph = tf.get_default_graph()
-        with graph.as_default():
-        	preds = model.predict(img_data)[0]
+        # graph = tf.get_default_graph()
+        # with graph.as_default():
+        preds = model.predict(img_data)[0]
 
         result = [(classes[i], float(preds[i]) * 100.0) for i in range(len(preds))]
         result.sort(reverse=True, key=lambda x: x[1])
