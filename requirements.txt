@@ -1,9 +1,11 @@
-numpy==1.19.3
-Flask==1.0.2
 scipy==1.2.1
+numpy==1.16.0
+Flask==1.0.2
+werkzeug>=0.15.3
 gevent==1.4.0
-matplotlib==3.0.2
+PyMySQL==0.9.3
 pandas==0.24.1
-tf_nightly==1.13.0.dev20190223
+Keras==2.3.1
+firebase==3.0.1
 scikit_learn==0.24.0
 tensorflow==2.4.0
