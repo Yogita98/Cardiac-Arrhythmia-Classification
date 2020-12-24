@@ -6,4 +6,4 @@ matplotlib==3.0.2
 pandas==0.24.1
 tf_nightly==1.13.0.dev20190223
 scikit_learn==0.24.0
-tensorflow==2.4.0
+tensorflow==2.2.0
