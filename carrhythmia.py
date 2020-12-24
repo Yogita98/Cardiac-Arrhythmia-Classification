@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+# from __future__ import division, print_function
 # coding=utf-8
 
 # from firebase import firebase
@@ -13,7 +13,7 @@ from tensorflow.keras.models import load_model
 
 # Flask utils
 from gevent.pywsgi import WSGIServer
-from flask import Flask, render_template, request, jsonify, Response,redirect, url_for, request
+from flask import Flask, render_template, request
 
 #Other utilities 
 import numpy as np
@@ -40,6 +40,8 @@ from pathlib import Path
 
 
 app = Flask(__name__)
+SECRET_KEY=os.urandom(24)
+app.config['SECRET_KEY']=SECRET_KEY
 print('Running on http://localhost:5000')
 model = load_model('C:/Users/bhati/Desktop/My Docs/BE project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
 print('Xception Model loaded.')
@@ -285,5 +287,6 @@ def predictXception():
 
 if __name__ == "__main__":
 	new_data = {}
-	http_server = WSGIServer(('', 5000), app)
-	http_server.serve_forever()
+	# http_server = WSGIServer(('', 5000), app)
+	# http_server.serve_forever()
+	app.run(debug=True, host='127.0.0.1',port=5500)
