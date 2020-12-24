@@ -12,7 +12,7 @@ from tensorflow.keras.applications.xception import preprocess_input, Xception
 from tensorflow.keras.models import load_model
 
 # Flask utils
-from gevent.pywsgi import WSGIServer
+# from gevent.pywsgi import WSGIServer
 from flask import Flask, render_template, request
 
 #Other utilities 
@@ -43,7 +43,7 @@ app = Flask(__name__)
 SECRET_KEY=os.urandom(24)
 app.config['SECRET_KEY']=SECRET_KEY
 print('Running on http://localhost:5000')
-model = load_model('C:/Users/bhati/Desktop/My Docs/BE project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
+model = load_model('./models/xception_fine_tuned.h5')
 print('Xception Model loaded.')
 
 def get_file_path_and_save(request):
@@ -121,7 +121,17 @@ def uploadcsv():
 		data_test_y = Data_Y 
 
 
-		selected_features = [0, 1, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 17, 20, 22, 25, 26, 27, 28, 29, 30, 32, 34, 36, 38, 39, 41, 44, 49, 51, 52, 53, 56, 62, 63, 64, 65, 68, 70, 72, 75, 76, 77, 80, 82, 87, 88, 89, 90, 92, 93, 94, 95, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 111, 112, 113, 116, 119, 120, 122, 123, 124, 125, 128, 129, 134, 135, 136, 137, 138, 140, 142, 146, 147, 148, 149, 152, 154, 158, 159, 160, 161, 162, 166, 167, 168, 169, 170, 171, 172, 173, 175, 176, 177, 178, 180, 181, 188, 189, 190, 191, 195, 196, 197, 198, 199, 200, 201, 202, 206, 207, 208, 209, 210, 211, 212, 216, 219, 220, 221, 222, 223, 225, 226, 227, 228, 229, 230, 231, 232, 233, 235, 236, 237, 238, 239, 240, 241, 242, 245, 246, 247, 248, 249, 250, 251, 252, 256, 257, 258, 259, 260, 261, 262, 263, 265, 266, 267, 268, 269, 270, 271, 272, 275, 276, 277, 278]
+		selected_features = [0, 1, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 17, 20, 
+			22, 25, 26, 27, 28, 29, 30, 32, 34, 36, 38, 39, 41, 44, 49, 51, 52, 53, 56, 62, 
+			63, 64, 65, 68, 70, 72, 75, 76, 77, 80, 82, 87, 88, 89, 90, 92, 93, 94, 95, 99, 
+			100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 111, 112, 113, 116, 119, 120, 
+			122, 123, 124, 125, 128, 129, 134, 135, 136, 137, 138, 140, 142, 146, 147, 148, 149, 
+			152, 154, 158, 159, 160, 161, 162, 166, 167, 168, 169, 170, 171, 172, 173, 175, 176, 
+			177, 178, 180, 181, 188, 189, 190, 191, 195, 196, 197, 198, 199, 200, 201, 202, 206, 
+			207, 208, 209, 210, 211, 212, 216, 219, 220, 221, 222, 223, 225, 226, 227, 228, 229, 
+			230, 231, 232, 233, 235, 236, 237, 238, 239, 240, 241, 242, 245, 246, 247, 248, 249, 
+			250, 251, 252, 256, 257, 258, 259, 260, 261, 262, 263, 265, 266, 267, 268, 269, 270, 
+			271, 272, 275, 276, 277, 278]
 
 		selected_features.append(279)
 
@@ -146,7 +156,7 @@ def uploadcsv():
 		data1_test_y = Data1_Y
 
 
-		filename = 'final_model_KSVM.sav'
+		filename = './models/final_model_KSVM.sav'
 		loaded_model = pickle.load(open(filename, 'rb'))
 
 
@@ -207,7 +217,7 @@ def uploadwave():
 		# plt.show()
 		wave_file_name_no_ext=Path(wav_file_name).stem
 		print(wave_file_name_no_ext)
-		path='C:/Users/bhati/Desktop/My Docs/BE project/Cardiac-Arrhythmia-Classification/result/'
+		path='./result/'
 		plt.savefig(str(path+wave_file_name_no_ext) + '.png',dpi=100,frameon='false',aspect='normal',bbox_inches='tight',pad_inches=0) # Spectrogram saved as a .png
 		# plt.show()
 		userdata = dict(request.form)
@@ -237,7 +247,7 @@ def predictXception():
 
         # load class names
         classes = []
-        with open('C:/Users/bhati/Desktop/My Docs/BE project/Cardiac-Arrhythmia-Classification/classes.txt', 'r') as f:
+        with open('classes.txt', 'r') as f:
             classes = list(map(lambda x: x.strip(), f.readlines()))
 
 
