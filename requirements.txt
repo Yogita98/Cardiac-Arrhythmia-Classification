@@ -1,11 +1,8 @@
-scipy==1.2.1
-numpy==1.16.0
+numpy==1.19.3
 Flask==1.0.2
-werkzeug>=0.15.3
+scipy==1.2.1
 gevent==1.4.0
-PyMySQL==0.9.3
+matplotlib==3.0.2
 pandas==0.24.1
-Keras==2.3.1
-firebase==3.0.1
 scikit_learn==0.24.0
 tensorflow==2.4.0
