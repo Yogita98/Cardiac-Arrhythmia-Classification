@@ -45,8 +45,8 @@ print('Running on http://localhost:5000')
 # basepath = os.path.dirname(__file__)
 # import os
 base_path = os.path.dirname(os.path.abspath(__file__))
-filename = os.path.join(base_path, 'xception_fine_tuned.h5')
-# filename = 'xception_fine_tuned.h5'
+# filename = os.path.join(base_path, 'xception_fine_tuned.h5')
+filename = 'flaskModel.h5'
 model = load_model(filename)
 print('Xception Model loaded.')
 
@@ -165,8 +165,8 @@ def uploadcsv():
 
         # basepath = os.path.dirname(__file__)
 
-        filename = os.path.join(base_path, 'final_model_KSVM.sav')
-        # filename = 'final_model_KSVM.sav'
+        # filename = os.path.join(base_path, 'final_model_KSVM.sav')
+        filename = 'final_model_KSVM.sav'
         # filename = 'models/final_model_KSVM.sav'
         loaded_model = pickle.load(open(filename, 'rb'))
 
