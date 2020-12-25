@@ -42,13 +42,8 @@ app = Flask(__name__)
 SECRET_KEY = os.urandom(24)
 app.config['SECRET_KEY'] = SECRET_KEY
 print('Running on http://localhost:5000')
-<<<<<<< HEAD
 # basepath = os.path.dirname(__file__)
 filename = 'xception_fine_tuned.h5'
-=======
-basepath = os.path.dirname(__file__)
-filename = os.path.join(basepath, 'models', 'xception_fine_tuned.h5')
->>>>>>> ef03f8c944f5330d5a31365cabc9877827be4449
 model = load_model(filename)
 print('Xception Model loaded.')
 
@@ -165,13 +160,8 @@ def uploadcsv():
 
         data1_test_y = Data1_Y
 
-<<<<<<< HEAD
         # basepath = os.path.dirname(__file__)
         filename = 'final_model_KSVM.sav'
-=======
-        basepath = os.path.dirname(__file__)
-        filename = os.path.join(basepath, 'models', 'final_model_KSVM.sav')
->>>>>>> ef03f8c944f5330d5a31365cabc9877827be4449
         # filename = 'models/final_model_KSVM.sav'
         loaded_model = pickle.load(open(filename, 'rb'))
 
