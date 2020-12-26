@@ -12,7 +12,6 @@ from tensorflow.keras.applications.xception import preprocess_input, Xception
 from tensorflow.keras.models import load_model
 
 # Flask utils
-# from gevent.pywsgi import WSGIServer
 from flask import Flask, render_template, request
 
 # Other utilities
@@ -46,7 +45,7 @@ print('Running on http://localhost:5000')
 # import os
 base_path = os.path.dirname(os.path.abspath(__file__))
 # filename = os.path.join(base_path, 'xception_fine_tuned.h5')
-filename = 'C:/Users/bhati/Desktop/My docs/Hosted BE Project/Cardiac-Arrhythmia-Classification/flaskModel.h5'
+filename = 'flaskModel.h5'
 model = load_model(filename)
 print('Xception Model loaded.')
 
@@ -68,32 +67,32 @@ def get_file_path_and_save(request):
 
 
 @app.route('/')
-@app.route('/index/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
 
-@app.route('/login/')
+@app.route('/login')
 def login():
     return render_template('Login_Doc.html')
 
 
-@app.route('/signup/')
+@app.route('/signup')
 def signup():
     return render_template('Signup_Doc.html')
 
 
-@app.route('/wavefeature/')
+@app.route('/wavefeature')
 def wavefeature():
     return render_template('Wave_Feature.html')
 
 
-@app.route('/wave_upload/', methods=['GET', 'POST'])
+@app.route('/wave_upload', methods=['GET', 'POST'])
 def wave_upload():
     return render_template('Wave_Upload.html')
 
 
-@app.route('/feature_upload/')
+@app.route('/feature_upload')
 def feature_upload():
     return render_template('Feature_Upload.html')
 
@@ -244,15 +243,6 @@ def uploadwave():
 
     return render_template('Prediction.html')
 
-
-# @app.route('/wave_result', methods=['GET'])
-# def wave_result():
-#     # Main page
-#     return render_template('wave_result.html')
-# 	# if request.method == 'POST':
-# 	# 	result = "Wave file uploaded successfully!!"
-# 	#
-
 @app.route('/predictXception', methods=['GET', 'POST'])
 def predictXception():
     if request.method == 'POST':
@@ -268,13 +258,6 @@ def predictXception():
         img_data = image.img_to_array(img)
         img_data = np.expand_dims(img_data, axis=0)
         img_data = preprocess_input(img_data)
-        # img_data = preprocess_input_xception(img_data)
-
-        # model = load_model('C:/Users/bhati/Desktop/BE project/Cardiac-Arrhythmia-Classification/model_fine_final.h5')
-        # print('Xception Model loaded.')
-
-        # graph = tf.get_default_graph()
-        # with graph.as_default():
         preds = model.predict(img_data)[0]
 
         result = [(classes[i], float(preds[i]) * 100.0)
@@ -298,11 +281,7 @@ def predictXception():
             print("Class name: %s" % (class_name))
             print("Probability: %.2f%%" % (prob))
         return json.dumps(result1)
-
-        # decode the results into a list of tuples (class, description, probability)
-        # pred_class = decode_predictions_xception(preds, top=1)
-        # result = str(pred_class[0][0][1])  # Convert to string
-        return result1
+        # return result1
     return None
 
 
