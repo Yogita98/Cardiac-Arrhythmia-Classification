@@ -1,1 +1,1 @@
-web: gunicorn carrhythmia:app
+web: gunicorn app:app

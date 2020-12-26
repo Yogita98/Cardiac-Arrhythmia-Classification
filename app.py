@@ -45,9 +45,9 @@ print('Running on http://localhost:5000')
 # import os
 base_path = os.path.dirname(os.path.abspath(__file__))
 # filename = os.path.join(base_path, 'xception_fine_tuned.h5')
-filename = 'flaskModel.h5'
-model = load_model(filename)
-print('Xception Model loaded.')
+# filename = 'flaskModel.h5'
+# model = load_model(filename)
+# print('Xception Model loaded.')
 
 
 def get_file_path_and_save(request):
