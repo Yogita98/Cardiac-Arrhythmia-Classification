@@ -7,7 +7,7 @@ Carrhythmia is a website which can help the doctors in determining whether the p
 ### Below are the steps to run the project on your local machine:
 
 1. Create a virtual environment with the help of the following command
-> python3 -m venv some-virtual-env-name
+``` python3 -m venv some-virtual-env-name```
 2. Enable the virtual environment by running the following command
 > python3 -m venv some-virtual-env-name
 3. Clone the repository
