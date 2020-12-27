@@ -6,10 +6,10 @@ Carrhythmia is a website which can help the doctors in determining whether the p
 ## How to setup the project on your local machine?
 ### Below are the steps to run the project on your local machine:
 
-- Create a virtual environment with the following command
-- Clone the repository
-- Download all the required dependencies with the help of the below command
-- Run the following command on your console and you're ready to go!
+1 Create a virtual environment with the following command
+2 Clone the repository
+3 Download all the required dependencies with the help of the below command
+4 Run the following command on your console and you're ready to go!
 
 ### Do support the project by starring the project if you liked our work!
 
