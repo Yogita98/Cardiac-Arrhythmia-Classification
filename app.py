@@ -236,7 +236,7 @@ def uploadwave():
         age = userdata["age"]
         #gender = userdata["hgender"]
         gender = "Female"
-        new_data.update({"Name": name, "Age": age, "Gender": gender})
+        # new_data.update({"Name": name, "Age": age, "Gender": gender})
         # firebase.post("/w_patients", new_data)
 
     return render_template('Prediction.html')
@@ -272,7 +272,7 @@ def predictXception():
         elif(prob2 > prob1):
             result1 = str(class_name2)
 
-        new_data.update({"Class": result1})
+        # new_data.update({"Class": result1})
         # firebase.post("/w_patients", new_data)
 
         print(json.dumps(result1))
