@@ -9,12 +9,13 @@ Carrhythmia is a website which can help the doctors in determining whether the p
 1. Create a virtual environment with the help of the following command  
 ``` python3 -m venv some-virtual-env-name ```
 2. Enable the virtual environment by running the following command  
-``` python3 -m venv some-virtual-env-name ```
+``` some-virtual-env-name\Scripts\activate ```
 3. Clone the repository
 4. Download all the required dependencies with the help of the below command  
 ``` pip install -r requirements.txt ```
 5. Finally run the following command on your console and you're ready to go!  
 ``` python3 carrhythmia.py ```
 
+Live Project: https://carrhythmia.herokuapp.com/
 ### Do support the project by starring the repository if you liked our work!
 
