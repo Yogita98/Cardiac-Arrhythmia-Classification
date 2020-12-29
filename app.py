@@ -45,9 +45,6 @@ print('Running on http://localhost:5000')
 # import os
 base_path = os.path.dirname(os.path.abspath(__file__))
 # filename = os.path.join(base_path, 'xception_fine_tuned.h5')
-# filename = 'flaskModel.h5'
-# model = load_model(filename)
-# print('Xception Model loaded.')
 
 
 def get_file_path_and_save(request):
@@ -167,50 +164,51 @@ def uploadcsv():
         # filename = os.path.join(base_path, 'final_model_KSVM.sav')
         filename = 'final_model_KSVM.sav'
         # filename = 'models/final_model_KSVM.sav'
-        loaded_model = pickle.load(open(filename, 'rb'))
+        result="testing"
+        # loaded_model = pickle.load(open(filename, 'rb'))
 
-        pred = loaded_model.predict(data1_test_x)
-        predicted_class = str(pred)
-        predicted_class = predicted_class.replace('[', '')
-        predicted_class = predicted_class.replace(']', '')
+        # pred = loaded_model.predict(data1_test_x)
+        # predicted_class = str(pred)
+        # predicted_class = predicted_class.replace('[', '')
+        # predicted_class = predicted_class.replace(']', '')
 
-        actual_class = str(data1_test_y)
-        actual_class = actual_class.replace('[', '')
-        actual_class = actual_class.replace(']', '')
-        print("Predicted Class is: " + predicted_class)
-        print("Actual Class is: " + actual_class)
-        # output = (predicted,actual)
-        output = []
-        output = [int(predicted_class), int(actual_class)]
+        # actual_class = str(data1_test_y)
+        # actual_class = actual_class.replace('[', '')
+        # actual_class = actual_class.replace(']', '')
+        # print("Predicted Class is: " + predicted_class)
+        # print("Actual Class is: " + actual_class)
+        # # output = (predicted,actual)
+        # output = []
+        # output = [int(predicted_class), int(actual_class)]
 
-        # build a response dict to send back to client
-        response = {
-            'Predicted Class - ': int(predicted_class), 'Actual Class - ': int(actual_class)}
+        # # build a response dict to send back to client
+        # response = {
+        #     'Predicted Class - ': int(predicted_class), 'Actual Class - ': int(actual_class)}
 
-        if(predicted_class == 1):
-            result = ""
-        else:
-            result = "Arrhythmia Detected!!"
+        # if(predicted_class == 1):
+        #     result = ""
+        # else:
+        #     result = "Arrhythmia Detected!!"
 
-        types = ["No Arrhythmia", "Ischemic Changes Arrhythmia", "Old Anterior Myocardial Infarction Arrhythmia",
-                 "Old Inferior Myocardial Infarction Arrhythmia", "Sinus Tachycardy Arrhythmia", "Sinus bradycardy Arrhythmia",
-                 "Ventricular Premature Contraction Arrhythmia", "Superventricular Premature Contraction Arrhythmia", "Left bundle branch block Arrhythmia",
-                 "Right bundle branch block Arrhythmia", "1 degree AtrioVentricular Block Arrhythmia", "2 degree AtrioVentricular Block Arrhythmia",
-                 "3 degree AtrioVentricular Block Arrhythmia", "Left ventricule hypertrophy Arrhythmia", "Atrial Fibrillation Arrhythmia", "Other type of Arrhythmia"]
+        # types = ["No Arrhythmia", "Ischemic Changes Arrhythmia", "Old Anterior Myocardial Infarction Arrhythmia",
+        #          "Old Inferior Myocardial Infarction Arrhythmia", "Sinus Tachycardy Arrhythmia", "Sinus bradycardy Arrhythmia",
+        #          "Ventricular Premature Contraction Arrhythmia", "Superventricular Premature Contraction Arrhythmia", "Left bundle branch block Arrhythmia",
+        #          "Right bundle branch block Arrhythmia", "1 degree AtrioVentricular Block Arrhythmia", "2 degree AtrioVentricular Block Arrhythmia",
+        #          "3 degree AtrioVentricular Block Arrhythmia", "Left ventricule hypertrophy Arrhythmia", "Atrial Fibrillation Arrhythmia", "Other type of Arrhythmia"]
 
-        i = int(predicted_class)-1
-        class1 = str(types[i])
-        #type = "Predicted Class: " + predicted_class + "  ,  Actual Class:" + actual_class
-        type = "Arrhythmia Class is:   " + class1
-        userdata = dict(request.form)
-        print(userdata)
-        name = userdata["name"]
-        age = userdata["age"]
-        #gender = userdata["hgender"]
-        gender = "Female"
-        new_data = {"Name": name, "Age": age,
-                    "Gender": gender, "Class": class1}
-        # firebase.post("/f_patients", new_data)
+        # i = int(predicted_class)-1
+        # class1 = str(types[i])
+        # #type = "Predicted Class: " + predicted_class + "  ,  Actual Class:" + actual_class
+        # type = "Arrhythmia Class is:   " + class1
+        # userdata = dict(request.form)
+        # print(userdata)
+        # name = userdata["name"]
+        # age = userdata["age"]
+        # #gender = userdata["hgender"]
+        # gender = "Female"
+        # new_data = {"Name": name, "Age": age,
+        #             "Gender": gender, "Class": class1}
+        # # firebase.post("/f_patients", new_data)
 
     return render_template('feature_result.html', result=result, type=type)
 
@@ -258,6 +256,10 @@ def predictXception():
         img_data = image.img_to_array(img)
         img_data = np.expand_dims(img_data, axis=0)
         img_data = preprocess_input(img_data)
+        filename = 'flaskModel.h5'
+        model = load_model(filename)
+        print('Xception Model loaded.')
+
         preds = model.predict(img_data)[0]
 
         result = [(classes[i], float(preds[i]) * 100.0)
