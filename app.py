@@ -1,6 +1,3 @@
-# from __future__ import division, print_function
-# coding=utf-8
-
 # from firebase import firebase
 # import pymysql
 
@@ -13,6 +10,7 @@ from tensorflow.keras.models import load_model
 
 # Flask utils
 from flask import Flask, render_template, request
+from werkzeug.utils import secure_filename
 
 # Other utilities
 import numpy as np
@@ -20,16 +18,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
-# from sklearn.feature_selection import RFE
-# from sklearn.feature_selection import RFECV
-from sklearn import preprocessing
 from matplotlib import pyplot as plt
 import pickle
 from sklearn.metrics import r2_score, mean_squared_error, classification_report
-# import sys
 import json
 import matplotlib
-# matplotlib.use('Agg')
 from scipy.io import wavfile
 import os
 import csv
@@ -41,22 +34,17 @@ app = Flask(__name__)
 SECRET_KEY = os.urandom(24)
 app.config['SECRET_KEY'] = SECRET_KEY
 print('Running on http://localhost:5000')
-# basepath = os.path.dirname(__file__)
-# import os
-base_path = os.path.dirname(os.path.abspath(__file__))
-# filename = os.path.join(base_path, 'xception_fine_tuned.h5')
 
-
-def get_file_path_and_save(request):
+def get_file_path(request):
     # Get the file from post request
     f = request.files['file']
     print(f)
 
-    # Save the file to ./uploads
+    # Build the filepath 
     basepath = os.path.dirname(__file__)
     file_path = os.path.join(
         basepath, 'result', f.filename)
-    # f.save(file_path)
+    
     return file_path
 
 
@@ -155,16 +143,10 @@ def uploadcsv():
         # MinMax
         MinMax = MinMaxScaler(feature_range=(0, 1))
         data1_test_x = MinMax.fit_transform(Data1_X)
-        ##data1_test_x = MinMax.transform(data1_test_x)
-
+        
         data1_test_y = Data1_Y
-
-        # basepath = os.path.dirname(__file__)
-
-        # filename = os.path.join(base_path, 'final_model_KSVM.sav')
+        
         filename = 'final_model_KSVM.sav'
-        # filename = 'models/final_model_KSVM.sav'
-        # result="testing"
         loaded_model = pickle.load(open(filename, 'rb'))
 
         pred = loaded_model.predict(data1_test_x)
@@ -227,7 +209,7 @@ def uploadwave():
         wave_file_name_no_ext = Path(wav_file_name).stem
         print(wave_file_name_no_ext)
         path = './result/'
-        plt.savefig(str(path+wave_file_name_no_ext) + '.png', dpi=100, frameon='false',
+        plt.savefig(str(path+secure_filename(wave_file_name_no_ext)) + '.png', dpi=100, frameon='false',
                     aspect='normal', bbox_inches='tight', pad_inches=0)  # Spectrogram saved as a .png
         # plt.show()
         userdata = dict(request.form)
@@ -244,7 +226,7 @@ def uploadwave():
 @app.route('/predictXception', methods=['GET', 'POST'])
 def predictXception():
     if request.method == 'POST':
-        file_path = get_file_path_and_save(request)
+        file_path = get_file_path(request)
 
         # load class names
         classes = []
@@ -289,6 +271,4 @@ def predictXception():
 
 if __name__ == "__main__":
     new_data = {}
-    # http_server = WSGIServer(('', 5000), app)
-    # http_server.serve_forever()
     app.run(debug=True, host='127.0.0.1', port=5500)
